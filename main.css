@@ -8,7 +8,9 @@ canvas {
     display: block;
     background-color: #222;
 }
-
+.nomCouter {
+    opacity: .5;
+}
 .brainNode {
     border-radius: 0%;
     display: inline-block;

@@ -13,6 +13,9 @@ var speed = 0;
 var targetSpeed = 0;
 var speedChangeInterval = 0;
 var food = [];
+var nomCounter=0;
+var nomSound = new Audio('carrotnom-92106.mp3');
+
 
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
@@ -281,6 +284,8 @@ function update() {
             if (Math.hypot(Math.round(target.x) - food[i].x, Math.round(target.y) - food[i].y) <= 20) {
                 // eat food if close enough
                 food.splice(i, 1);
+                nomCounter++;
+                nomSound.play();
             }
         }
     }
@@ -343,7 +348,27 @@ function draw() {
     ctx.fillText('🎀', x, y);
     ctx.fillText('🎀', x, y);
     ctx.fillText('🎀', x, y);
+
     
+    // Save the current state of the canvas context
+    ctx.save();
+
+    // Set the text style
+    ctx.fillStyle = "rgba(128, 128, 128, 0.5)"; // Gray color with reduced opacity
+    ctx.font = "50px sans-serif"; // Set font size and family
+
+    // Determine the position to center the text
+    var text = "noms: " + nomCounter;
+    var textWidth = ctx.measureText(text).width;
+    var centerX = canvas.width / 2 - textWidth / 2;
+    var centerY = canvas.height / 2;
+
+    // Draw the number at the calculated position
+    ctx.fillText(text, centerX, centerY);
+
+    // Restore the canvas context to its original state
+    ctx.restore();
+
 }
 
 
