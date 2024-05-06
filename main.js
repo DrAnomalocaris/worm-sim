@@ -180,18 +180,33 @@ function addFood(event) {
     food.push({ "x": x, "y": y ,"size": 1});
 }
 function randomFood(){
-    var mother = food[Math.floor(Math.random()*food.length)];
-    var x = mother.x;
-    var y = mother.y;
-    x += Math.random()*100-50;
-    y += Math.random()*100-50;
-    x -= canvas.offsetLeft;
-    y -= canvas.offsetTop;
+    if (food.length == 0) {
+        var x = Math.random()*canvas.width;
+        var y = Math.random()*canvas.height;
+        x -= canvas.offsetLeft;
+        y -= canvas.offsetTop;
 
-    food.push({ "x": x, "y": y,"size": 1});
+        food.push({ "x": x, "y": y,"size": 1});
+
+    }
+    if (Math.random() < 0.1)  {
+        
+        var mother = food[Math.floor(Math.random()*food.length)];
+        var x = mother.x;
+        var y = mother.y;
+        x += Math.random()*100-50;
+        y += Math.random()*100-50;
+        x -= canvas.offsetLeft;
+        y -= canvas.offsetTop;
+
+        food.push({ "x": x, "y": y,"size": 1});
+    }
+    if (food.length > 1000) {
+        food.splice(0, 1);
+    }
    
 }
-setInterval(randomFood, 500);
+setInterval(randomFood, 100);
 
 function drawFood() {
     for (var i = 0; i < food.length; i++) {
