@@ -21,7 +21,17 @@ function toggleConnectome() {
 BRAIN.setup();
 for (var ps in BRAIN.connectome) {
     var nameBox = document.createElement('span');
-    //nameBox.innerHTML = ps;
+    nameBox.innerHTML = ps;
+    nameBox.style.fontSize = "8px"; // Set font size
+    if (["RIML", "RIMR", "RICL", "RICR"].includes(ps)) {
+        nameBox.style.color = "red"; // Change the color of innerHTML
+    }
+    if (["PVDL", "PVDR"].includes(ps)) {
+        nameBox.style.color = "yellow"; // Change the color of innerHTML
+    }
+    if (["ASEL", "ASER"].includes(ps)) {
+        nameBox.style.color = "green"; // Change the color of innerHTML
+    }
     document.getElementById("nodeHolder").appendChild(nameBox);
 
     var newBox = document.createElement('span');
@@ -163,16 +173,31 @@ canvas.addEventListener("mousedown", addFood, false);
 function addFood(event) {
     var x = event.x;
     var y = event.y;
-
     x -= canvas.offsetLeft;
     y -= canvas.offsetTop;
 
-    food.push({ "x": x, "y": y });
+    food.push({ "x": x, "y": y ,"size": 1});
 }
+function randomFood(){
+    var mother = food[Math.floor(Math.random()*food.length)];
+    var x = mother.x;
+    var y = mother.y;
+    x += Math.random()*100-50;
+    y += Math.random()*100-50;
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+
+    food.push({ "x": x, "y": y,"size": 1});
+   
+}
+setInterval(randomFood, 500);
 
 function drawFood() {
     for (var i = 0; i < food.length; i++) {
-        circle(ctx, food[i].x, food[i].y, 10, 'rgb(251,192,45)');
+        if (food[i].size < 10) {
+            food[i].size += 0.5;
+        }
+        circle(ctx, food[i].x, food[i].y, food[i].size, 'rgba(251,192,45,0.5)');
     }
 }
 
