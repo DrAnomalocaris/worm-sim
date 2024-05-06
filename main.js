@@ -22,7 +22,8 @@ BRAIN.setup();
 for (var ps in BRAIN.connectome) {
     var nameBox = document.createElement('span');
     nameBox.innerHTML = ps;
-    nameBox.style.fontSize = "8px"; // Set font size
+    nameBox.style.color = "white";
+    nameBox.style.fontSize = "10px"; // Set font size
     if (["RIML", "RIMR", "RICL", "RICR"].includes(ps)) {
         nameBox.style.color = "red"; // Change the color of innerHTML
     }
