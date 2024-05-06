@@ -33,14 +33,21 @@ for (var ps in BRAIN.connectome) {
     if (["ASEL", "ASER"].includes(ps)) {
         nameBox.style.color = "green"; // Change the color of innerHTML
     }
+
+    //nameBox.id = ps;
+    //nameBox.className = "brainNodeName";
+    nameBox.cols = 3;
+    nameBox.rows = 1;
+    nameBox.id = ps;
+    nameBox.className = "brainNode";
     document.getElementById("nodeHolder").appendChild(nameBox);
 
-    var newBox = document.createElement('span');
-    newBox.cols = 3;
-    newBox.rows = 1;
-    newBox.id = ps;
-    newBox.className = "brainNode";
-    document.getElementById("nodeHolder").appendChild(newBox);
+    //var newBox = document.createElement('span');
+    //newBox.cols = 3;
+    //newBox.rows = 1;
+    //newBox.id = ps;
+    //newBox.className = "brainNode";
+    //document.getElementById("nodeHolder").appendChild(newBox);
 }
 
 function updateBrain() {
@@ -49,8 +56,8 @@ function updateBrain() {
         var psBox = document.getElementById(ps);
         var neuron = BRAIN.postSynaptic[ps][BRAIN.thisState];
 
-        psBox.style.backgroundColor = "#55FF55";
-        psBox.style.opacity = Math.min(1, neuron / 50);
+        psBox.style.backgroundColor = "rgba(85, 255, 85, " + Math.min(1, neuron / 50) + ")";
+        psBox.style.opacity = 1;
     }
     let scalingFactor = 20;
     let newDir = ((BRAIN.accumleft - BRAIN.accumright) / scalingFactor);

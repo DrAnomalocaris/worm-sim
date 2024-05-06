@@ -10,10 +10,10 @@ canvas {
 }
 
 .brainNode {
-    border-radius: 50%;
+    border-radius: 0%;
     display: inline-block;
     height: 3vmin;
-    width: 3vmin;
+    width: 6vmin;
     text-align: center;
     transition: opacity .5s;
     /* trigger hardware acceleration */
@@ -22,6 +22,8 @@ canvas {
     -webkit-transform-style: preserve-3d;
     will-change: transform;
     -webkit-backface-visibility: hidden;
+    line-height: 3vmin; /* Same as height */
+
 }
 
 #nodeHolder {
