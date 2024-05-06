@@ -169,7 +169,7 @@ function circle(ctx, x, y, r, c) {
 function line(ctx, x1, y1, x2, y2) {
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
-    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.strokeStyle = 'rgba(255,182,193,0.5)';
     ctx.stroke();
 }
 
@@ -300,7 +300,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFood();
 
-    circle(ctx, target.x, target.y, 5, 'rgba(255,255,255,0.1)');
+    circle(ctx, target.x, target.y, 5, 'rgba(255,182,193,0.1)');
 
     var link = chain.links[0];
     var p1 = link.head,
@@ -308,10 +308,12 @@ function draw() {
 
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "rgb(255,182,193)";
     ctx.lineWidth = 20;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
+    var x=p1.x;
+    var y=p1.y;
 
     for (var i = 0, n = chain.links.length; i < n; ++i) {
         link = chain.links[i];
@@ -322,6 +324,26 @@ function draw() {
     }
 
     ctx.stroke();
+
+    // Draw the bow emoji at coordinates (p1.x, p1.y)
+    ctx.font = '20px sans-serif'; // Set font size and family
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    ctx.fillText('🎀', x, y);
+    
 }
 
 
