@@ -412,3 +412,62 @@ setInterval(function() {
     update();
     draw();
 }, 1e3 / 60);
+
+// Function to update age
+// Function to update age
+// Function to update age
+function updateAge() {
+    var ageElement = document.getElementById("ageValue");
+    var now = new Date();
+    var ageInSeconds = (now - birthDate) / 1000;
+
+    var years = Math.floor(ageInSeconds / (365 * 24 * 60 * 60));
+    var days = Math.floor(ageInSeconds % (365 * 24 * 60 * 60) / (24 * 60 * 60));
+    var hours = Math.floor(ageInSeconds % (24 * 60 * 60) / (60 * 60));
+    var minutes = Math.floor(ageInSeconds % (60 * 60) / 60);
+    var seconds = Math.floor(ageInSeconds % 60);
+
+    var ageString = "";
+
+    if (years === 1) {
+        ageString += "1 year ";
+    } else if (years > 1) {
+        ageString += years + " years ";
+    }
+
+    if (days === 1) {
+        ageString += "1 day ";
+    } else if (days > 1) {
+        ageString += days + " days ";
+    }
+
+    if (hours === 1) {
+        ageString += "1 hour ";
+    } else if (hours > 1) {
+        ageString += hours + " hours ";
+    }
+
+    if (minutes === 1) {
+        ageString += "1 minute ";
+    } else if (minutes > 1) {
+        ageString += minutes + " minutes ";
+    }
+
+    if (seconds === 1 ) {
+        ageString += "1 second";
+    } else if (seconds > 1) {
+        ageString += seconds + " seconds";
+    }
+
+    ageElement.textContent = ageString;
+}
+
+
+
+// Call updateAge function initially
+var birthDate = new Date();
+
+updateAge();
+
+// Update age every second
+setInterval(updateAge, 1000);

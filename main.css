@@ -9,11 +9,13 @@ canvas {
     background-color: #000000;
 }
 
-#nomCounter {
+#nomCounter, #age {
     font-size: 40px; /* Adjust font size as needed */
     color: #888; /* Light gray color */
     align-items: center;
 }
+
+
 .brainNode {
     border-radius: 0%;
     display: inline-block;
