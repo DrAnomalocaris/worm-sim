@@ -21,7 +21,7 @@ var sound=true;
 var start=true;
 
 var trail=[];
-var maxtrail=100;
+var maxtrail=10000;
 
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
@@ -405,6 +405,8 @@ function draw() {
     }else {
         start = false;
     }
+
+
 }());
 
 
@@ -476,15 +478,17 @@ updateAge();
 setInterval(updateAge, 1000);
 
 function updateTrail() {
-
+    if (food.length > 0) {
     trail.push({ x: chain.links[chain.links.length - 1].tail.x, y: chain.links[chain.links.length - 1].tail.y });
+    }
     if (trail.length > maxtrail) {
         trail.shift();
     }
 }
 updateTrail();
-setInterval(updateTrail, 100);
+setInterval(updateTrail, 10);
 function drawTrail() {
+    
     ctx.beginPath();
     ctx.strokeStyle = "rgba(255,255,255,.25)";
     ctx.lineWidth = 20;
@@ -493,6 +497,7 @@ function drawTrail() {
     ctx.moveTo(trail[0].x, trail[0].y);
     for (var i = 1; i < trail.length; i++) {
         ctx.lineTo(trail[i].x, trail[i].y);
+        
     }
     ctx.stroke();
     ctx.closePath();
