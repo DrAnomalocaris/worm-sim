@@ -16,7 +16,7 @@ var food = [];
 var nomCounter=0;
 var nomSound = new Audio('carrotnom-92106.mp3');
 var sound=true;
-
+var start=true;
 
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
@@ -397,6 +397,13 @@ function draw() {
     for (var i = 0; i < food.length; i++) {
         food[i].x *= mx;
         food[i].y *= my;
+    }
+    if (start == false) {
+        target.x *= mx;
+        target.y *= my;
+        
+    }else {
+        start = false;
     }
 }());
 
