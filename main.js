@@ -1,3 +1,4 @@
+/*
 document.getElementById("clearButton").onclick = function() {
     food = [];
 }
@@ -6,7 +7,7 @@ document.getElementById("centerButton").onclick = function() {
     target.x = window.innerWidth / 2;
     target.y = window.innerHeight / 2;
 }
-
+*/
 var facingDir = 0;
 var targetDir = 0;
 var speed = 0;
@@ -14,7 +15,7 @@ var targetSpeed = 0;
 var speedChangeInterval = 0;
 var food = [];
 var nomCounter=0;
-var nomSound = new Audio('carrotnom-92106.mp3');
+var nomSound = new Audio('nom.mp3');
 var sound=true;
 var start=true;
 
