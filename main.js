@@ -8,6 +8,7 @@ document.getElementById("centerButton").onclick = function() {
     target.y = window.innerHeight / 2;
 }
 */
+var chainLength = 200;
 var facingDir = 0;
 var targetDir = 0;
 var speed = 0;
@@ -18,6 +19,9 @@ var nomCounter=0;
 var nomSound = new Audio('nom.mp3');
 var sound=true;
 var start=true;
+
+var trail=[];
+var maxtrail=100;
 
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
@@ -237,7 +241,7 @@ var target = {
     y: window.innerHeight / 2
 };
 
-var chain = new IKChain(200, 1);
+var chain = new IKChain(chainLength, 1);
 
 function update() {
 
@@ -312,7 +316,7 @@ function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFood();
-
+    drawTrail();
     circle(ctx, target.x, target.y, 5, 'rgba(255,182,193,0.1)');
 
     var link = chain.links[0];
@@ -335,8 +339,9 @@ function draw() {
         ctx.lineTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
     }
-
     ctx.stroke();
+
+
 
     // Draw the bow emoji at coordinates (p1.x, p1.y)
     ctx.font = '20px sans-serif'; // Set font size and family
@@ -376,12 +381,6 @@ function draw() {
 
     var nomValueElement = document.getElementById("nomValue");
     nomValueElement.textContent = nomCounter; // Change "5" to whatever number you want to display
-
-
-
-
-
-
 
     // Restore the canvas context to its original state
     ctx.restore();
@@ -461,6 +460,9 @@ function updateAge() {
     }
 
     ageElement.textContent = ageString;
+
+
+
 }
 
 
@@ -472,3 +474,26 @@ updateAge();
 
 // Update age every second
 setInterval(updateAge, 1000);
+
+function updateTrail() {
+
+    trail.push({ x: chain.links[chain.links.length - 1].tail.x, y: chain.links[chain.links.length - 1].tail.y });
+    if (trail.length > maxtrail) {
+        trail.shift();
+    }
+}
+updateTrail();
+setInterval(updateTrail, 100);
+function drawTrail() {
+    ctx.beginPath();
+    ctx.strokeStyle = "rgba(255,255,255,.25)";
+    ctx.lineWidth = 20;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.moveTo(trail[0].x, trail[0].y);
+    for (var i = 1; i < trail.length; i++) {
+        ctx.lineTo(trail[i].x, trail[i].y);
+    }
+    ctx.stroke();
+    ctx.closePath();
+}
