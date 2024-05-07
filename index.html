@@ -12,15 +12,26 @@
     <label id="toggleConnectome" class="switch">
         <input id="connectomeCheckbox" type="checkbox" checked onclick="toggleConnectome()">
         <span class="slider round"></span>
+        
     </label>
-    
+
     <!--<a href="https://github.com/Fantop/worm-sim">
         <img id="githubButton" src="github.svg" class="noselect">
     </a>-->
     <div id="buttons">
+        <div id="nomCounter">noms: <span id="nomValue">0</span></div>
+
+        <label id="toggleSound" class="switch">
+            <input id="soundCheckbox" type="checkbox" checked onclick="toggleSound()">
+            <span class="slider round"></span>
+        </label>
+        
+
         <img id="centerButton" src="center.svg" height="40px" class="noselect">
         <img id="clearButton" src="clear.svg" height="40px" class="noselect">
+        
     </div>
+
     <script type="text/javascript" src="connectome.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </body>

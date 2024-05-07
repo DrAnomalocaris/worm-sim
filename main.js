@@ -15,12 +15,16 @@ var speedChangeInterval = 0;
 var food = [];
 var nomCounter=0;
 var nomSound = new Audio('carrotnom-92106.mp3');
+var sound=true;
 
 
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
 }
 
+function toggleSound() {
+    sound = document.getElementById("soundCheckbox").checked;
+}
 BRAIN.setup();
 for (var ps in BRAIN.connectome) {
     var nameBox = document.createElement('span');
@@ -285,7 +289,10 @@ function update() {
                 // eat food if close enough
                 food.splice(i, 1);
                 nomCounter++;
-                nomSound.play();
+                if (sound) {
+                    nomSound.play();
+                    
+                }
             }
         }
     }
@@ -358,13 +365,22 @@ function draw() {
     ctx.font = "50px sans-serif"; // Set font size and family
 
     // Determine the position to center the text
-    var text = "noms: " + nomCounter;
-    var textWidth = ctx.measureText(text).width;
-    var centerX = canvas.width / 2 - textWidth / 2;
-    var centerY = canvas.height / 2;
+    //var text = "noms: " + nomCounter;
+    //var textWidth = ctx.measureText(text).width;
+    //var centerX = canvas.width / 2 - textWidth / 2;
+    //var centerY = canvas.height / 2;
 
     // Draw the number at the calculated position
-    ctx.fillText(text, centerX, centerY);
+    //ctx.fillText(text, centerX, centerY);
+
+    var nomValueElement = document.getElementById("nomValue");
+    nomValueElement.textContent = nomCounter; // Change "5" to whatever number you want to display
+
+
+
+
+
+
 
     // Restore the canvas context to its original state
     ctx.restore();
@@ -373,9 +389,15 @@ function draw() {
 
 
 (function resize() {
+    var mx = window.innerWidth/canvas.width;
+    var my = window.innerHeight/canvas.height;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     window.onresize = resize;
+    for (var i = 0; i < food.length; i++) {
+        food[i].x *= mx;
+        food[i].y *= my;
+    }
 }());
 
 
