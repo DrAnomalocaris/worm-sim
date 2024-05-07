@@ -398,7 +398,7 @@ function draw() {
         food[i].x *= mx;
         food[i].y *= my;
     }
-    if (start == false) {
+    if (start == false) {//error when "resizing" first time as it is opening the page, this way it doesn't run on start
         target.x *= mx;
         target.y *= my;
         
