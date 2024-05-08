@@ -19,10 +19,13 @@ var nomCounter=0;
 var nomSound = new Audio('nom.mp3');
 var sound=true;
 var start=true;
-
+var secondsAlive=0;
 var trail=[];
 var maxtrail=10000;
-
+function updateSecondsAlive() {
+    secondsAlive++;
+}
+setInterval(updateSecondsAlive, 1000);
 function toggleConnectome() {
     document.getElementById("nodeHolder").style.opacity = document.getElementById("connectomeCheckbox").checked ? "1" : "0";
 }
@@ -421,7 +424,7 @@ setInterval(function() {
 function updateAge() {
     var ageElement = document.getElementById("ageValue");
     var now = new Date();
-    var ageInSeconds = (now - birthDate) / 1000;
+    var ageInSeconds = secondsAlive;
 
     var years = Math.floor(ageInSeconds / (365 * 24 * 60 * 60));
     var days = Math.floor(ageInSeconds % (365 * 24 * 60 * 60) / (24 * 60 * 60));
@@ -468,9 +471,6 @@ function updateAge() {
 }
 
 
-
-// Call updateAge function initially
-var birthDate = new Date();
 
 updateAge();
 
